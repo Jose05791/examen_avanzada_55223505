@@ -1,5 +1,5 @@
 <?php
-require_once 'Database.php';
+require_once 'ConexDB.php';
 
 class Nota {
     private $conn;
