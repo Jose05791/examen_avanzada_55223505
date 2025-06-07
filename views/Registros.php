@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Registrar Nota</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="styles" href="assets/style.css">
 </head>
 <body>
     <h1>Registrar Nueva Nota</h1>

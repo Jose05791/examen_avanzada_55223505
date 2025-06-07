@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Listado de Notas</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="styles" href="assets/style.css">
 </head>
 <body>
     <h1>Listado de Notas</h1>

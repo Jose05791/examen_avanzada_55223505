@@ -16,7 +16,7 @@ class NotaController {
             header("Location: index.php?action=listar");
             exit;
         } else {
-            require __DIR__ . '/../views/registrar.php';
+            require __DIR__ . '/../views/Registros.php';
         }
     }
 }
