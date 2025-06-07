@@ -1,12 +1,12 @@
 <?php
-require_once "models/Nota.php";
+require_once __DIR__ . '/../models/Nota.php';
 
 class NotaController {
     public function listar() {
         $nota = new Nota();
         $notas = $nota->listar();
         $promedio = $nota->promedio();
-        require "views/listar.php";
+        require __DIR__ . '/../views/listar.php';
     }
 
     public function registrar() {
@@ -14,8 +14,9 @@ class NotaController {
             $nota = new Nota();
             $nota->registrar($_POST['estudiante'], $_POST['descripcion'], $_POST['nota']);
             header("Location: index.php?action=listar");
+            exit;
         } else {
-            require "views/registrar.php";
+            require __DIR__ . '/../views/registrar.php';
         }
     }
 }

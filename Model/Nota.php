@@ -1,30 +1,35 @@
 <?php
-require_once "config/database.php";
+require_once 'Database.php';
 
 class Nota {
     private $conn;
-    private $table = "notas";
 
     public function __construct() {
         $database = new Database();
-        $this->conn = $database->getConnection();
-    }
-
-    public function registrar($estudiante, $descripcion, $nota) {
-        $sql = "INSERT INTO {$this->table} (estudiante, descripcion, nota) VALUES (?, ?, ?)";
-        $stmt = $this->conn->prepare($sql);
-        return $stmt->execute([$estudiante, $descripcion, $nota]);
+        $this->conn = $database->conectar();
     }
 
     public function listar() {
-        $sql = "SELECT * FROM {$this->table}";
-        $stmt = $this->conn->query($sql);
+        $sql = "SELECT * FROM notas";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function promedio() {
-        $sql = "SELECT AVG(nota) as promedio FROM {$this->table}";
-        $stmt = $this->conn->query($sql);
-        return $stmt->fetch(PDO::FETCH_ASSOC)['promedio'];
+        $sql = "SELECT AVG(nota) as promedio FROM notas";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row['promedio'] ?? 0;
+    }
+
+    public function registrar($estudiante, $descripcion, $nota) {
+        $sql = "INSERT INTO notas (estudiante, descripcion, nota) VALUES (:estudiante, :descripcion, :nota)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':estudiante', $estudiante);
+        $stmt->bindParam(':descripcion', $descripcion);
+        $stmt->bindParam(':nota', $nota);
+        return $stmt->execute();
     }
 }

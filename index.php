@@ -1,11 +1,14 @@
 <?php
-require_once "controllers/NotaController.php";
+require_once __DIR__ . '/controller/NotaController.php';
 
-$action = $_GET['action'] ?? 'listar';
 $controller = new NotaController();
 
-if (method_exists($controller, $action)) {
-    $controller->$action();
+$action = $_GET['action'] ?? 'listar';
+
+if ($action === 'listar') {
+    $controller->listar();
+} elseif ($action === 'registrar') {
+    $controller->registrar();
 } else {
     echo "Acción no válida.";
 }
